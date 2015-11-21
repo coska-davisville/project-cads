@@ -1,5 +1,6 @@
 logs
 target
+bower_components
 /.idea
 /.idea_modules
 /.classpath
