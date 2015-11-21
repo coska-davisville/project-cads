@@ -10,3 +10,17 @@
 * bower install
 * activator run
 * [Open in browser](http://localhost:9000)
+
+#### Vagrant instruction
+* [Install vagrart](https://docs.vagrantup.com/v2/installation/index.html)
+* Run following commands
+```bash
+git clone https://github.com/coska-davisville/project-cads.git
+cd project-cads
+vagrant up // this could take a while at first time running
+vagrant ssh
+cd $HOME/sites/cads/
+activator run
+```
+* Open browser
+* go to localhost:9000
