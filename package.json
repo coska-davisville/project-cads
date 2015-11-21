@@ -1,0 +1,26 @@
+{
+  "name": "cads",
+  "version": "1.0.0",
+  "description": "#### How to setup development environment * [Install activator](https://www.typesafe.com/activator/download) * [Install node & npm](https://nodejs.org/en/download/) * [Install gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) * [Install bower](http://bower.io/#install-bower) * git clone https://github.com/coska-davisville/project-cads.git * cd project-cads * bower install * activator run * [Open in browser](http://localhost:9000)",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coska-davisville/project-cads.git"
+  },
+  "author": "Coska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coska-davisville/project-cads/issues"
+  },
+  "homepage": "https://github.com/coska-davisville/project-cads#readme",
+  "dependencies": {
+    "bower": "^1.6.5",
+    "gulp": "^3.9.0"
+  }
+}
