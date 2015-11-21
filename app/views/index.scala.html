@@ -2,6 +2,27 @@
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message)
+<h1>REST API List<h1>
+
+<h2>Get all users</h2>
+<p><a href="/users">GET /users</a></p>
+
+<h2>Create a user</h2>
+<p>POST /users</p>
+
+<h2>Login</h2>
+<p>POST /users/login</p>
+
+<h2>Get a user by id</h2>
+<p><a href="/users/a%40a.com">GET /users/:id</a></p>
+
+<h2>Get users by province</h2>
+<p><a href="/users/province/ON">GET /users/province/:provinceId</a></p>
+
+<h2>Get users by province and program</h2>
+<p><a href="/users/province/ON/program/Horseshoe">GET /users/province/:provinceId/program/:programId</a></p>
+
+<h2>Get users per page</h2>
+<p><a href="/users/pages/2/3">GET /users/pages/:pageSize/:pageNum</a></p>
 
 }
