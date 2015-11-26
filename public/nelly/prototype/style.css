@@ -55,9 +55,10 @@ div#memberList table.memberList th {
     text-transform: uppercase;
     background-color: rgb(100, 97, 142);
     color: #fff;
+    text-shadow: 1px 1px 1px #333;
 }
 
-div#memberList table.memberList td, div#member table.memberList th {
+div#memberList table.memberList td, div#memberList table.memberList th {
     text-align: center;
     padding: 1em;
 }
@@ -104,8 +105,39 @@ div#memberList ul.pagination {
 }
 
 /*List Add*/
+div#memberAdd div.panel {
+    margin-bottom: 1.5em;
+}
+
 div#memberAdd div.panel-body {
     background-color: #F5F5F5;
+}
+
+div#memberAdd div.panel div.panel-heading {
+    background-color: rgb(81, 131, 175);
+    text-shadow: 1px 1px 1px #333;
+    padding: .7em 1em;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+div#memberAdd div.panel:first-child div.panel-heading:after {
+    content: "\f077";
+    font-family: FontAwesome;
+    float: right;
+    color: #333;
+}
+
+div#memberAdd div.panel div.panel-heading:after {
+    content: "\f078";
+    font-family: FontAwesome;
+    float: right;
+    color: #333;
+}
+
+div#memberAdd div.panel div.panel-footer {
+    background-color: #fff;
+    border-top: solid 1px #ddd;
 }
 
 /*VIEW*/
