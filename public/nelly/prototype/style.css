@@ -1,0 +1,131 @@
+/*General*/
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700);
+
+body {
+    background: #eee url('./images/body-bg.png');
+    font-family: 'Noto Sans', sans-serif;
+}
+.wrap {
+    background: #fff;
+    margin: 3em auto;
+    width: 90%;
+    min-height: 600px;
+    border-radius: 8px;
+    padding: 2em 4em;
+    background-color: #fff;
+    box-shadow: 1px 6px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/*Header*/
+header {
+    background: #fff;
+}
+
+header > div {
+    display: inline-block;
+}
+
+header div.userInfo span {
+    padding: 1em 0.5em;
+}
+
+header img#logo {
+    padding: 1em 0em;
+}
+
+header div.userInfo {
+    display: inline-block;
+    float: right;
+    padding-top: 26px;
+    text-align: right;
+}
+
+/*LOGIN*/
+
+/*LIST*/
+div#memberList table.memberList {
+    border: solid 1px #ddd;
+}
+
+div#memberList button#addUser{
+    float: left;
+    margin: 10px 0;
+}
+div#memberList table.memberList th {
+    text-transform: uppercase;
+    background-color: rgb(100, 97, 142);
+    color: #fff;
+}
+
+div#memberList table.memberList td, div#member table.memberList th {
+    text-align: center;
+    padding: 1em;
+}
+
+div#member_list_filter {
+    width: 15%;
+    float: right;
+    padding-left: 0;
+    margin: 10px 0;
+}
+
+div#member_list_filter:before {
+    font-family: FontAwesome;
+    content: "\f002";
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    top: 7px;
+}
+
+div#member_list_filter input {
+    border-radius: 4px;
+    padding-right: 2.2em;
+}
+
+div#member_list_filter input::-webkit-input-placeholder{
+    font-style: italic;
+    color: #ccc;
+}
+
+div#memberList ul.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 0;
+    float: right;
+}
+.pagination>li>a, .pagination>li>span {
+    color: #3F4759;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color:  rgb(100, 97, 142);
+    border-color:  rgb(100, 97, 142);
+}
+
+/*List Add*/
+div#memberAdd div.panel-body {
+    background-color: #F5F5F5;
+}
+
+/*VIEW*/
+
+/*FOOTER*/
+footer {
+    background: #C4C4C4;
+    padding: 1em 0 1em 0;
+    border-top: 10px #3F4759 solid;
+}
+
+footer strong {
+    font-size: 1.2em;
+    display: inherit;
+}
+
+footer img#partnersImg {
+    border-radius: 1em;
+}
+
+footer p.partners+div {
+    background: #C4C4C4;
+}
