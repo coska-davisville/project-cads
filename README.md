@@ -27,8 +27,8 @@ activator run
 
 #### Front-End Dev Instruction
 
-* git checkout -b <branch name>
+* git checkout -b \<branch name\>
 * modify source code
 * git checkout master
-* git merge <branch name>
-* git branch -d <branch name>
+* git merge \<branch name\>
+* git branch -d \<branch name\>
