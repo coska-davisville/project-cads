@@ -14,14 +14,12 @@
 <body>
 
     <ul class="menu">    
-        <li><a ui-sref="home">Home</a></li>
-        <li><a ui-sref="about">About</a></li>
+        <li><a ui-sref="login">Login</a></li>
+        <li><a ui-sref="registration">Registration</a></li>
+        <li><a ui-sref="memberList">Member List</a></li>
+        <li><a ui-sref="memberDetail">Member Detail</a></li>
+        <li><a ui-sref="roleManagement">Admin - Role Management</a></li>
     </ul>
-
-    <div ng-controller="TestController">
-        <p>{{message}}</p>
-        <button ng-click="click()">click me</button>
-    </div>
 
     <div ui-view></div>
     
@@ -33,8 +31,11 @@
     
     <script src="app/module.js"></script>
     <script src="app/route.js"></script>
-    <script src="app/home/homeController.js"></script>
-    <script src="app/about/aboutController.js"></script>
+    <script src="app/user/loginController.js"></script>
+    <script src="app/user/memberDetailController.js"></script>
+    <script src="app/user/memberListController.js"></script>
+    <script src="app/user/registrationController.js"></script>
+    <script src="app/admin/roleManagementController.js"></script>
 
 </body>
 </html>

@@ -13,4 +13,5 @@ GET     /users/province/:provinceId/program/:programId       controllers.Users.g
 GET     /users/pages/:pageSize/:pageNum                      controllers.Users.getUsersByPage(pageSize: Int, pageNum: Int)
 
 # Map static resources from the /public folder to the /assets URL path
+
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
