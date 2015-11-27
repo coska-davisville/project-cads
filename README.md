@@ -27,9 +27,8 @@ activator run
 
 #### Front-End Dev Instruction
 
-* Make your own folder in public folder first using seed directory (just copy seed to your-folder)
-* access URL: localhost:9000/assets/your-folder/index.html
-* If the working page doesn't change immediately, do 'activator run' again.
-
-
-
+* git checkout -b <branch name>
+* modify source code
+* git checkout master
+* git merge <branch name>
+* git branch -d <branch name>
