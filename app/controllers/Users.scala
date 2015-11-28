@@ -1,13 +1,41 @@
 package controllers
 
 import play.api._
+import play.api.http._
 import play.api.mvc._
 import play.api.libs.json._
+import play.api.data._
+import play.api.data.Forms._
+
+import play.api.Logger
 
 case class User(program: String, province: String, membership: String, email: String, firstName: String, lastName: String)
 
-class Users extends Controller {
-	
+object Users extends Controller {
+
+	case class UserForm(email: String, password: String)
+	case class UserCredential(email: String, token: String)
+
+	val wrongEmailOrPassword = Status(520)("Wrong email or password")
+
+	// Form mapping definitions
+
+	val userForm = Form(
+		mapping(
+			"email" -> email,
+			"password" -> nonEmptyText
+		)(UserForm.apply)(UserForm.unapply))
+
+
+	// implicits for JSON serialization
+
+	implicit val userCredentialWrites = new Writes[UserCredential] {
+	  def writes(uc: UserCredential) = Json.obj(
+	  	"email"		-> uc.email,
+	  	"token"		-> uc.token
+	  )
+	}
+
 	implicit val userWrites = new Writes[User] {
 	  def writes(user: User) = Json.obj(
 	  	"program"		-> user.program,
@@ -19,6 +47,7 @@ class Users extends Controller {
 	  )
 	}
 
+	// test data
 	val users = List(
 		User("Snow Valley", "ON", "volunteer", "a@a.com", "John", "Smith"),
 		User("Horseshoe", "ON", "participant skier", "b@b.com", "Jane", "Doe"),
@@ -28,9 +57,37 @@ class Users extends Controller {
 		User("Horseshoe", "BC", "participant skier", "e@e.com", "Jane", "Doe"),
 		User("Mansfield", "BC", "participant skier", "f@f.com", "Carrie", "Underwood")
 	)
+}
 
-	def all = Action {
-		Ok(Json.toJson(users))
+class Users extends Controller {
+
+	import Users._
+	
+	def login = Action { implicit request =>
+
+		userForm.bindFromRequest.value match {
+			case Some(data)	=> {
+				Ok(Json.toJson(UserCredential(data.email, data.password)))
+			}
+			case None 		=> {
+				userForm.bindFromRequest.errors.foreach(x => Logger.error(x.message))
+				wrongEmailOrPassword
+			}
+		}
+	}
+
+	def create = Action {
+		Ok("create")
+	}
+
+	def all = Action { implicit request =>
+		request.headers.get(HeaderNames.AUTHORIZATION) match {
+			case Some(auth)	=> {
+				Logger.info(auth)
+				Ok(Json.toJson(users))
+			}
+			case None 		=> Unauthorized("Need to login.")
+		}
 	}
 
 	def get(id: String) = Action {
@@ -40,14 +97,6 @@ class Users extends Controller {
 			}
 			case None 		=> Status(540)("No such user " + id)
 		}
-	}
-
-	def login = Action {
-		Ok("login")
-	}
-
-	def create = Action {
-		Ok("create")
 	}
 
 	def getUsersByProvince(provinceId: String) = Action {
