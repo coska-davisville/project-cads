@@ -1,5 +1,4 @@
-
-w to test javascript code
+# How to test javascript code
 
 ## Installation
 
@@ -14,15 +13,23 @@ $ npm install karma --save-dev
 $ npm install karma-jasmine karma-phantomjs-launcher --save-dev
 ```
 
-## Generate karma config file
+## Generating karma config file
 ```
 $ karma init
 ```
+`karma init` will create `karma.config.js`.
 
-## Start Karma
+## Starting Karma
 ```
+$ ./node_modules/karma/bin/karma start
+```
+
+or using command line interface
+```
+$ npm install -g karma-cli
 $ karma start
 ```
+
 or using gulp
 ```
 gulp test
@@ -36,6 +43,15 @@ gulp test
 ## Controller
 ```
 //controller
+angular.module('myApp')
+.controller('HomeController', ['$scope', function($scope) {
+    $scope.sum = function(a, b) {
+        return a + b;
+    };
+}]);
+```
+```
+//test for controller
 describe('HomeController', function() {
     beforeEach(module('myApp'));
 
@@ -57,6 +73,20 @@ describe('HomeController', function() {
 ## Service
 ```
 //service
+angular.module('myApp')
+.factory('MathService', function() {
+    return {
+        add : function(a, b) {
+            return a + b;
+        },
+        subtract : function(a, b) {
+            return a - b;
+        }
+    };
+});
+```
+```
+//test for service
 describe('HomeService', function() {
     beforeEach(module('myApp'));
 
@@ -81,6 +111,16 @@ describe('HomeService', function() {
 ## Filter
 ```
 //filter
+angular.module('myApp')
+.filter('upper', function() {
+    return function(input) {
+        input = input || '';
+        return input.toUpperCase();
+    };
+});
+```
+```
+//test for filter
 describe('HomeFilter', function() {
     beforeEach(module('myApp'));
 
@@ -100,7 +140,18 @@ describe('HomeFilter', function() {
 
 ## Directive
 ```
-//directives
+//directive
+angular.module('myApp')
+.directive('aGreatEye', function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: '<h1>lidless, wreathed in flame, {{1 + 1}} times</h1>'
+    };
+});
+```
+```
+//test for directive
 describe('HomeDirective', function() {
     beforeEach(module('myApp'));
 
@@ -120,4 +171,3 @@ describe('HomeDirective', function() {
     });
 });
 ```
-
