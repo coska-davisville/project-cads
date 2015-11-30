@@ -1,5 +1,5 @@
 
-w to test javascript code
+How to test javascript code
 
 ## Installation
 
