@@ -32,3 +32,6 @@ activator run
 * git checkout master
 * git merge \<branch name\>
 * git branch -d \<branch name\>
+
+#### Useful Github References
+* [Syncing a fork](https://help.github.com/articles/syncing-a-fork/)
