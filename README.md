@@ -35,3 +35,5 @@ activator run
 
 #### [JavaScript Test Instruction](HOWTOTESTJAVASCRIPT.md)
 
+#### Useful Github References
+* [Syncing a fork](https://help.github.com/articles/syncing-a-fork/)
