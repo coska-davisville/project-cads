@@ -32,3 +32,6 @@ activator run
 * git checkout master
 * git merge \<branch name\>
 * git branch -d \<branch name\>
+
+#### [JavaScript Test Instruction](HOWTOTESTJAVASCRIPT.md)
+
