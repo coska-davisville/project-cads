@@ -33,5 +33,7 @@ activator run
 * git merge \<branch name\>
 * git branch -d \<branch name\>
 
+#### [JavaScript Test Instruction](HOWTOTESTJAVASCRIPT.md)
+
 #### Useful Github References
 * [Syncing a fork](https://help.github.com/articles/syncing-a-fork/)
