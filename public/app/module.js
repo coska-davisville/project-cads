@@ -2,7 +2,7 @@
 
 var cadsApp = angular.module('cadsApp', ['ui.router']);
 
-cadsApp.factory('BackendService', ['$http', function(http) {
+cadsApp.factory('BackendService', function($http) {
     
     var credential = { email: "", token: "" };
 
@@ -14,15 +14,15 @@ cadsApp.factory('BackendService', ['$http', function(http) {
             return !(credential.email.length === 0);
         },
         login: function(email, pw, successCallback, errorCallback) {
-            http({ method: "POST", url: "/users/login", data: {email: email, password: pw} })
+            $http({ method: "POST", url: "/users/login", data: {email: email, password: pw} })
             .then(
                 function(response) { // succeeded
                     credential = response.data;
-                    http.defaults.headers.common.Authorization = credential.token;
+                    $http.defaults.headers.common.Authorization = credential.token;
                     successCallback(response);
                 },
                 function(response) { // failed
-                    http.defaults.headers.common.Authorization = "";
+                    $http.defaults.headers.common.Authorization = "";
                     errorCallback(response);
                 });
         },
@@ -33,7 +33,7 @@ cadsApp.factory('BackendService', ['$http', function(http) {
                 return;
             }
 
-            http(configObj)
+            $http(configObj)
             .then(
                 function(response) {
                     successCallback(response);
@@ -47,7 +47,7 @@ cadsApp.factory('BackendService', ['$http', function(http) {
                 });
         }
     };
-}]);
+});
 
 cadsApp.controller('TestController', ['$scope','BackendService', function ($scope, bs) {
     
