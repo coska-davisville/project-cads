@@ -70,3 +70,30 @@ cadsApp.controller('TestController', ['$scope','BackendService', function ($scop
             });
     };
  }]);
+
+ cadsApp.controller('MainController', ['$scope','BackendService', '$state', function ($scope, bs, $state) {
+    
+    $scope.message = "";
+    
+    $scope.isLogin = function(){
+        return bs.isUserLoggedIn();
+    };
+    
+    // login
+    $scope.login = function(email, password) {
+        bs.login(email, password, 
+            function(r) { 
+                $scope.message = r.statusText; 
+                $state.go('home');
+            },
+            function(r) { $scope.message = r.statusText; });
+    };
+    // logout
+    $scope.logout = function() {
+        
+    };
+    
+    
+    
+
+ }]);
