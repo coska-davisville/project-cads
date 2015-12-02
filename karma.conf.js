@@ -21,7 +21,8 @@ module.exports = function(config) {
       'public/app/module.js',
       'public/app/route.js',
       'public/app/**/*.js',
-      'public/app/**/*Spec.js'
+      'public/app/**/*Spec.js',
+      'test/frontend/**/*Spec.js'
     ],
 
 
