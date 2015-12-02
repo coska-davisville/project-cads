@@ -1,14 +1,10 @@
-var gulp = require('gulp');
-var Server = require('karma').Server;
-var useref = require('gulp-useref');
-var gulpif = require('gulp-if');
-var uglify = require('gulp-uglify');
-var minifyCss = require('gulp-minify-css');
-var del = require('del');
-var rev = require('gulp-rev');
-var revReplace = require('gulp-rev-replace');
-var jshint = require('gulp-jshint');
+var gulp = require('gulp'),
+    Server = require('karma').Server,
+    gulpLoadPlugins = require('gulp-load-plugins'),
+    mainBowerFiles = require('main-bower-files'),
+    del = require('del');
 
+var $ = gulpLoadPlugins();
 var config = {
     distDir: './public/dist',
     tmpDir: './public/.tmp',
@@ -16,31 +12,39 @@ var config = {
 };
 
 gulp.task('default', function() {
-  // place code for your default task here
+
 });
 
-/**
- * Run test once and exit
- */
-gulp.task('test', function (done) {
+gulp.task('lint', function() {
+    return gulp.src('public/app/**/*.js')
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('default'))
+        .pipe($.jshint.reporter('fail'))
+        .on('error', function(err) {
+            this.end();
+        });
+});
+
+function startKarma(done) {
     new Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
     }, function() {
         done();
     }).start();
+}
+
+gulp.task('test:lint', ['lint'], function(done) {
+    startKarma(done);
 });
 
-gulp.task('jshint', function() {
-    return gulp.src('public/app/**/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-        .pipe(jshint.reporter('fail'))
+gulp.task('test', function(done) {
+    startKarma(done);
 });
 
 
 gulp.task('useref', function() {
-    var userefAssets = useref.assets({
+    var userefAssets = $.useref.assets({
         transformPath: function(filePath) {
             return filePath.replace('/assets','');
         }
@@ -48,13 +52,21 @@ gulp.task('useref', function() {
 
     return gulp.src('public/*.html')
         .pipe(userefAssets)
-        .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifyCss()))
-        .pipe(rev())
+        .pipe($.if('*.js', $.uglify()))
+        .pipe($.if('*.css', $.minifyCss()))
+        .pipe($.rev())
         .pipe(userefAssets.restore())
-        .pipe(useref())
-        .pipe(revReplace())
+        .pipe($.useref())
+        .pipe($.revReplace())
         .pipe(gulp.dest(config.tmpDir))
+});
+
+gulp.task('html', ['useref'], function(cb) {
+    return gulp.src([config.tmpDir + '/*.html', config.tmpDir + '/assets/dist/**/*.*'])
+        .pipe(gulp.dest(config.distDir))
+        .on('end', function() {
+            del(config.tmpDir);
+        });
 });
 
 gulp.task('images', function() {
@@ -63,27 +75,38 @@ gulp.task('images', function() {
 });
 
 gulp.task('fonts', function() {
-    return gulp.src([config.bowerDir + '/font-awesome/fonts/**.*', config.bowerDir + '/bootstrap/fonts/**.*'])
+    return gulp.src(mainBowerFiles().concat([
+            config.bowerDir + '/font-awesome/fonts/*',
+            config.bowerDir + '/bootstrap/fonts/*'
+        ]))
+        .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
         .pipe(gulp.dest(config.distDir + '/fonts'));
 });
 
-gulp.task('copy', ['useref'], function() {
-    return gulp.src([config.tmpDir + '/*.html', config.tmpDir + '/assets/dist/**/*.*'])
+gulp.task('extra', function() {
+    return gulp.src([
+            'public/*.*',
+            '!public/*.html',
+            '!public/.tmp'
+        ], {
+            dot: true
+        })
         .pipe(gulp.dest(config.distDir));
 });
 
-gulp.task('copy:dist', ['copy', 'images', 'fonts'], function(cb) {
-    del(config.tmpDir, cb);
+gulp.task('clean', function() {
+    return del([config.distDir, config.tmpDir]);
 });
 
-gulp.task('clean:dist', function(callback) {
-    del.sync([config.distDir, config.tmpDir], callback);
+gulp.task('build', ['clean'], function() {
+    gulp.start('build:static');
 });
 
+gulp.task('build:static', ['html', 'images', 'fonts', 'extra'], function() {
+    return gulp.src([config.distDir + '/*.html', config.distDir + '/**/*.js', config.distDir + '/**/*.css'])
+        .pipe($.size({title: config.distDir, showFiles: true}));
+});
 
-gulp.task('build', ['clean:dist', 'copy:dist']);
-
-
-gulp.task('lint', ['jshint'], function() {
-    gulp.start('test');
+gulp.task('build:lint', ['lint'], function() {
+    gulp.start('build');
 });
