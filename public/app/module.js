@@ -48,25 +48,3 @@ cadsApp.factory('BackendService', function($http) {
         }
     };
 });
-
-cadsApp.controller('TestController', ['$scope','BackendService', function ($scope, bs) {
-    
-    $scope.message = "";
-
-    $scope.login = function(email, password) {
-        bs.login(email, password, 
-            function(r) { $scope.message = r.statusText; },
-            function(r) { $scope.message = r.statusText; });
-    };
-
-    $scope.click = function() {
-        bs.callApi(
-            {method:'GET', url: '/users'}, 
-            function(r) { 
-                console.log(r.data);
-            }, 
-            function(r) { 
-                $scope.message = r.statusText;
-            });
-    };
- }]);

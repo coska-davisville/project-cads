@@ -2,13 +2,22 @@
 
 describe('BackendService', function() {
 
-    var BackendService;
+    var BackendService, httpBackend;
 
-    beforeEach(module('cadsApp'));
+    beforeEach(function() {
 
-    beforeEach(inject(function(_BackendService_) {
-        BackendService = _BackendService_;
-    }));
+        module('cadsApp');
+
+        inject(function($httpBackend, _BackendService_) {
+            BackendService = _BackendService_;
+            httpBackend = $httpBackend;
+        });
+    });
+
+    afterEach(function() {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
+    });
 
     it('credential should be empty before login', function() {
         expect(BackendService.getUserCredential().email).toEqual("");
@@ -33,40 +42,58 @@ describe('BackendService', function() {
         expect(response.statusText).toEqual("Unauthorized");
     });
 
-    describe('Mocked Http Requests', function() {
+    it('login should set user credential', function() {
         
-        var $httpBackend;
+        var response;
 
-        beforeEach(inject(function($injector) {
-            
-            $httpBackend = $injector.get('$httpBackend');
-            $httpBackend
-                .when('POST', '/users/login')
-                .respond(200, {email: 'abc@abc.com', token: 'xxx'});
-        }));
+        httpBackend.whenPOST('/users/login').respond({email: 'abc@abc.com', token: 'xxx'});
 
-        afterEach(function() {
-            $httpBackend.verifyNoOutstandingExpectation();
-            $httpBackend.verifyNoOutstandingRequest();
-        });
+        BackendService.login(
+            "abc@abc.com", "abcd",
+            function (r) { response = r; }, // successCallback
+            function (r) { response = r; }  // errorCallback
+        );
+        
+        httpBackend.flush();
 
-        it('login should be succeeded', function() {
-            
-            var response;
+        expect(response.status).toEqual(200);
+        expect(BackendService.getUserCredential().email).toEqual("abc@abc.com");
+        expect(BackendService.getUserCredential().token).toEqual("xxx");
+    });
 
-            BackendService.login(
-                "abc@abc.com", "abcd",
-                function (r) { response = r; }, // successCallback
-                function (r) { response = r; }  // errorCallback
-            );
+    it('callApi should succeed after login', function() {
+        
+        var response;
 
-            $httpBackend.expect('POST', '/user/login');
+        httpBackend.whenPOST('/users/login')
+            .respond({email: 'abc@abc.com', token: 'xxx'});
 
-            //expect(response.status).toEqual(200);
-            expect(BackendService.getUserCredential().email).toEqual("abc@abc.com");
-            expect(BackendService.getUserCredential().token).toEqual("xxx");
+        BackendService.login(
+            "abc@abc.com", "abcd",
+            function (r) { response = r; }, // successCallback
+            function (r) { response = r; }  // errorCallback
+        );
 
-            $httpBackend.flush();
-        });
+        httpBackend.flush();
+
+        httpBackend.whenGET('/users')
+            .respond([
+                {"program":"Snow Valley","province":"ON","membership":"volunteer","email":"a@a.com","firstName":"John","lastName":"Smith"},
+                {"program":"Horseshoe","province":"ON","membership":"participant skier","email":"b@b.com","firstName":"Jane","lastName":"Doe"},
+                {"program":"Horseshoe","province":"ON","membership":"participant skier","email":"bb@bb.com","firstName":"Mariah","lastName":"Carey"},
+                {"program":"Mansfield","province":"ON","membership":"participant skier","email":"c@c.com","firstName":"Carrie","lastName":"Underwood"}
+            ]);
+
+        BackendService.callApi(
+            {method: "GET", url: "/users"},
+            function (r) { response = r; },
+            function (r) { response = r; }
+        );
+        
+        httpBackend.flush();
+
+        expect(response.data);
+        expect(response.data.length).toEqual(4);
+        expect(response.data[0].program).toEqual("Snow Valley");
     });
 });
