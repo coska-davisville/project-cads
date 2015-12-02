@@ -3,17 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <title>Canadian Association for Disabled Skiing</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-    <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">    
+
+    <!-- build:css /assets/dist/css/styles.min.css -->
+    <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- endbuild -->
 </head>
 <body>
 
-    <ul class="menu">    
+    <ul class="menu">
         <li><a ui-sref="login">Login</a></li>
         <li><a ui-sref="registration">Registration</a></li>
         <li><a ui-sref="memberList">Member List</a></li>
@@ -22,13 +24,15 @@
     </ul>
 
     <div ui-view></div>
-    
-    <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    
-    <script src="/assets/bower_components/angular/angular.min.js"></script>
-    <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    
+
+    <!-- build:js /assets/dist/js/vendor.min.js -->
+    <script src="/assets/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/assets/bower_components/angular/angular.js"></script>
+    <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js /assets/dist/js/build.min.js -->
     <script src="/assets/app/module.js"></script>
     <script src="/assets/app/route.js"></script>
     <script src="/assets/app/user/loginController.js"></script>
@@ -36,6 +40,6 @@
     <script src="/assets/app/user/memberListController.js"></script>
     <script src="/assets/app/user/registrationController.js"></script>
     <script src="/assets/app/admin/roleManagementController.js"></script>
-
+    <!-- endbuild -->
 </body>
 </html>

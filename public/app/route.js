@@ -1,4 +1,4 @@
-cadsApp.config(function($stateProvider, $urlRouterProvider) {
+cadsApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise("/login");
@@ -29,4 +29,4 @@ cadsApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: "/assets/app/admin/roleManagement.html",
             controller: 'RoleManagementController'
         });
-});
+}]);
