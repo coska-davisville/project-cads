@@ -10,3 +10,5 @@ node_modules
 /.settings
 /RUNNING_PID
 .DS_Store
+/public/.tmp
+/public/dist

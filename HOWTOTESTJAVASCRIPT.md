@@ -41,7 +41,7 @@ gulp test
 # Testing with Jasmine
 
 ## Controller
-```
+```js
 //controller
 angular.module('myApp')
 .controller('HomeController', ['$scope', function($scope) {
@@ -50,7 +50,7 @@ angular.module('myApp')
     };
 }]);
 ```
-```
+```js
 //test for controller
 describe('HomeController', function() {
     beforeEach(module('myApp'));
@@ -71,7 +71,7 @@ describe('HomeController', function() {
 });
 ```
 ## Service
-```
+```js
 //service
 angular.module('myApp')
 .factory('MathService', function() {
@@ -85,7 +85,7 @@ angular.module('myApp')
     };
 });
 ```
-```
+```js
 //test for service
 describe('HomeService', function() {
     beforeEach(module('myApp'));
@@ -109,7 +109,7 @@ describe('HomeService', function() {
 });
 ```
 ## Filter
-```
+```js
 //filter
 angular.module('myApp')
 .filter('upper', function() {
@@ -119,7 +119,7 @@ angular.module('myApp')
     };
 });
 ```
-```
+```js
 //test for filter
 describe('HomeFilter', function() {
     beforeEach(module('myApp'));
@@ -139,7 +139,7 @@ describe('HomeFilter', function() {
 ```
 
 ## Directive
-```
+```js
 //directive
 angular.module('myApp')
 .directive('aGreatEye', function () {
@@ -150,7 +150,7 @@ angular.module('myApp')
     };
 });
 ```
-```
+```js
 //test for directive
 describe('HomeDirective', function() {
     beforeEach(module('myApp'));
