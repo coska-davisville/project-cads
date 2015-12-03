@@ -83,13 +83,19 @@ cadsApp.controller('TestController', ['$scope','BackendService', function ($scop
     $scope.login = function(email, password) {
         bs.login(email, password, 
             function(r) { 
-                $scope.message = r.statusText; 
-                $state.go('home');
+                $scope.message = r.statusText;                 
+                
+                // reload the current state
+                $state.reload($state.current.name);                
             },
             function(r) { $scope.message = r.statusText; });
     };
+    
     // logout
     $scope.logout = function() {
+        $scope.message = "logged out";        
+        
+        // ask logout to server using bs
         
     };
     

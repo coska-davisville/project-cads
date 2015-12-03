@@ -1,2 +1,50 @@
 <h1>memberList.html</h1>
 <h2>{{title}}</h2>
+
+        <div id="memberList" class="col-md-12 form-inline" ng-show="isLogin()">
+            <div class="form-group">
+                <button type="button" class="btn btn-default" ng-click="addUser()"><i class="fa fa-user"></i> Add User</button>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="keyword" placeholder="Search..."/>                
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" ng-click="search(keyword)">Search</button>
+            </div>
+            
+            
+            <table class="table memberList table-hover table-responsive table-striped ng-scope">
+                <thead>
+                <tr>
+                    <th>Program</th>
+                    <th>Member Type</th>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{user.program}}</td>
+                    <td>{{user.membership}}</td>
+                    <td><a href="">{{user.email}}</a></td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                </tr>                
+                </tbody>
+                
+            </table>
+            
+            <!--
+            <ul class="pagination">
+                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+            </ul>
+            -->
+        </div>

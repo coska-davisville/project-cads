@@ -6,8 +6,7 @@ cadsApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
             url: "/home",
-            templateUrl: "/assets/app/user/home.html",
-            controller: 'HomeController'
+            templateUrl: "/assets/app/user/home.html"
         })
         .state('login', {
             url: "/login",
