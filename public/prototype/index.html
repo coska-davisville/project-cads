@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canadian Association For Disabled Sking-Ontario</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- JS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="users.js"></script>
+</head>
+<body ng-app="cadsApp">
+    <header class="container-fluid">
+        <div class="col-md-3"><img id="logo" src="images/logo.jpg" alt="CADS LOGO" style="width:100%"/></div>
+    </header>
+    <div class="wrap">
+        <div id="login" class="col-md-12">
+            <div class="col-md-5">
+                <h3>Member Login</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                        <input class="form-control" id="usrname" placeholder="Enter email" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                        <input class="form-control" id="psw" placeholder="Enter password" type="password">
+
+                    </div>
+                    <div class="checkbox">
+                        <label><input id="login_checkbox" value="" type="checkbox">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-off"></span> Login
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-7">
+                <h3>Sign Up!</h3>
+                <form id="signUpForm">
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> Email</label>
+                        <input class="form-control" id="usrname" placeholder="Enter email" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                        <input class="form-control" id="psw" placeholder="Enter password" type="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-lock"></span> Confirm Password</label>
+                        <input class="form-control" id="psw" placeholder="Confirm password" type="password">
+                    </div>
+                    <div class="checkbox">
+                        <label><input id="login_checkbox" value="" type="checkbox">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-off"></span> Register
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<div ng-include="'./footer.html'"></div>
+</body>
+</html>

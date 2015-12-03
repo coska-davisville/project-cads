@@ -8,19 +8,19 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
     <!-- JS -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="./users.js"></script>
+    <script src="users.js"></script>
 </head>
 <body ng-app="cadsApp">
     <div ng-include="'./header.html'"></div>
     <div class="wrap">
         <div id="memberList" class="col-md-12">
-            <button id="addUser" onclick="location.href='./list_add.html'" type="button" class="btn btn-default"><i class="fa fa-user"></i> Add User</button>
+            <button id="addUser" onclick="location.href='list_add.html'" type="button" class="btn btn-default"><i class="fa fa-user"></i> Add User</button>
             <div id="member_list_filter" class="input-group"><input type="text" class="form-control" placeholder="Search..."/></div>
             <table class="table memberList table-hover table-responsive ng-scope">
                 <thead>
@@ -36,7 +36,7 @@
                 <tr>
                     <td>SNOW VALLEY</td>
                     <td>Volunteer</td>
-                    <td><a href="">email@test.com</a></td>
+                    <td>email@test.com</td>
                     <td>John</td>
                     <td>Smith</td>
                 </tr>

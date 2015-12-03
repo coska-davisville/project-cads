@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
 body {
-    background: #eee url('./images/body-bg.png');
+    background: #eee url('images/body-bg.png');
     font-family: 'Noto Sans', sans-serif;
 }
 .wrap {
