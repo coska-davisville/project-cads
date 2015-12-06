@@ -34,6 +34,17 @@ activator run
 * git branch -d \<branch name\>
 
 #### [JavaScript Test Instruction](HOWTOTESTJAVASCRIPT.md)
+* add your test cases for frontend under test/frontend folder
+
+#### Gulp Instruction
+* Build - `public/dist` directory will be created and new production files will be put into the directory
+```sh
+$ gulp build
+```
+* Test
+```sh
+$ gulp test
+```
 
 #### Useful Github References
 * [Syncing a fork](https://help.github.com/articles/syncing-a-fork/)

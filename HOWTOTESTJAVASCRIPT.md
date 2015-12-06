@@ -41,7 +41,7 @@ gulp test
 # Testing with Jasmine
 
 ## Controller
-```
+```js
 //controller
 angular.module('myApp')
 .controller('HomeController', ['$scope', function($scope) {
@@ -50,7 +50,7 @@ angular.module('myApp')
     };
 }]);
 ```
-```
+```js
 //test for controller
 describe('HomeController', function() {
     beforeEach(module('myApp'));
@@ -71,7 +71,7 @@ describe('HomeController', function() {
 });
 ```
 ## Service
-```
+```js
 //service
 angular.module('myApp')
 .factory('MathService', function() {
@@ -85,7 +85,7 @@ angular.module('myApp')
     };
 });
 ```
-```
+```js
 //test for service
 describe('HomeService', function() {
     beforeEach(module('myApp'));
@@ -109,7 +109,7 @@ describe('HomeService', function() {
 });
 ```
 ## Filter
-```
+```js
 //filter
 angular.module('myApp')
 .filter('upper', function() {
@@ -119,7 +119,7 @@ angular.module('myApp')
     };
 });
 ```
-```
+```js
 //test for filter
 describe('HomeFilter', function() {
     beforeEach(module('myApp'));
@@ -139,7 +139,7 @@ describe('HomeFilter', function() {
 ```
 
 ## Directive
-```
+```js
 //directive
 angular.module('myApp')
 .directive('aGreatEye', function () {
@@ -150,7 +150,7 @@ angular.module('myApp')
     };
 });
 ```
-```
+```js
 //test for directive
 describe('HomeDirective', function() {
     beforeEach(module('myApp'));
@@ -170,4 +170,56 @@ describe('HomeDirective', function() {
         });
     });
 });
+```
+
+## HTTP
+```js
+cadsApp.controller('LoginController', ['$scope', '$http', function ($scope, $http) {
+	$http.get('/users/a@a.com').then(function(data) {
+		$scope.data = data.data;
+	});
+}]);
+```
+```js
+//test for http
+describe('httpTest', function() {
+    beforeEach(module('cadsApp'));
+
+    var $httpBackend, $rootScope, createController;
+
+   beforeEach(inject(function($injector) {
+     // Set up the mock http service responses
+     $httpBackend = $injector.get('$httpBackend');
+     // backend definition common for all tests
+     $httpBackend.when('GET', '/users/a@a.com').respond({
+         "program":"Snow Valley",
+         "province":"ON",
+         "membership":"volunteer",
+         "email":"a@a.com",
+         "firstName":"John",
+         "lastName":"Smith"
+     });
+
+     // Get hold of a scope (i.e. the root scope)
+     $rootScope = $injector.get('$rootScope');
+     // The $controller service is used to create instances of controllers
+     var $controller = $injector.get('$controller');
+
+     createController = function() {
+       return $controller('LoginController', {'$scope' : $rootScope });
+     };
+   }));
+
+   afterEach(function() {
+     $httpBackend.verifyNoOutstandingExpectation();
+     $httpBackend.verifyNoOutstandingRequest();
+   });
+
+   it('should fetch authentication token', function() {
+     $httpBackend.expectGET('/users/a@a.com');
+     var controller = createController();
+     $httpBackend.flush();
+     expect($rootScope.data.firstName).toEqual('John');
+   });
+})
 ```

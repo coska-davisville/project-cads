@@ -3,14 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <title>Canadian Association for Disabled Skiing</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
         
     <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">    
     <link rel="stylesheet" href="/assets/stylesheets/main.css">    
+    <!-- build:css /assets/dist/css/styles.min.css -->
+
 </head>
 <body ng-controller="MainController">
 
@@ -69,7 +71,7 @@
     </nav>
 
 <!--
-    <ul class="menu">    
+    <ul class="menu">
         <li><a ui-sref="login">Login</a></li>
         <li><a ui-sref="registration">Registration</a></li>
         <li><a ui-sref="memberList">Member List</a></li>
@@ -80,7 +82,6 @@
     <div class="container main-content">
         <div ui-view></div>
     </div>
-    
     
     {{message}}
     
@@ -96,19 +97,19 @@
                         <area shape="rect" coords="654,5,776,81" href="http://www.track3.org/" target="_blank">
                         <area shape="rect" coords="530,4,628,85" href="http://www.alpinecanada.org/" target="_blank">
                     </map>
-                </div>
-
+                </div>                
             </p>
             <p align="center">Canadian Association for Disabled Skiing</p>
         </div>
     </footer>
-    
-    
+        
+    <!-- build:js /assets/dist/js/vendor.min.js -->
     <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    
+    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>    
     <script src="/assets/bower_components/angular/angular.min.js"></script>
     <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <!-- endbuild -->    
+    <!-- build:js /assets/dist/js/build.min.js -->
     
     <script src="/assets/app/module.js"></script>
     <script src="/assets/app/route.js"></script>
@@ -117,6 +118,6 @@
     <script src="/assets/app/user/memberListController.js"></script>
     <script src="/assets/app/user/registrationController.js"></script>
     <script src="/assets/app/admin/roleManagementController.js"></script>
-
+    <!-- endbuild -->
 </body>
 </html>
