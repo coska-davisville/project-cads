@@ -1,5 +1,7 @@
 import Gulp._
 import play.PlayImport.PlayKeys.playRunHooks
+import Keys._
+import PlayKeys._
 
 name := """project-cads"""
 
@@ -23,3 +25,5 @@ resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 routesGenerator := InjectedRoutesGenerator
 
 // playRunHooks <+= baseDirectory.map(base => Gulp(base))
+
+PlayKeys.devSettings += ("play.http.router", "dev.Routes")
