@@ -8,10 +8,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- build:css /assets/dist/css/styles.min.css -->
+    <!-- build:css /assets/css/styles.min.css -->
     <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">    
-    <link rel="stylesheet" href="/assets/stylesheets/main.css">    
+    <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/stylesheets/main.css">
     <!-- endbuild -->
 
 </head>
@@ -30,21 +30,21 @@
                 <a class="navbar-brand" href="#">
                     <img id="logo" src="./images/logo.jpg" alt="CADS LOGO" style="width:100%"/>
                 </a>
-            </div>            
-            
+            </div>
+
             <div id="navbar" class="navbar-collapse collapse">
-                
+
                 <ul class="nav navbar-nav menu">
                     <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
                     <li ui-sref-active="active"><a ui-sref="memberList">Member List</a></li>
                     <li ui-sref-active="active"><a ui-sref="memberDetail">Member Detail</a></li>
                     <li ui-sref-active="active"><a ui-sref="roleManagement">Admin - Role Management</a></li>
-                    
+
                     <li ui-sref-active="active" ng-hide="isLogin()">
                         <a ui-sref="registration">Sign-up</a>
                     </li>
                 </ul>
-                
+
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-hide="isLogin()">
                         <form class="navbar-form navbar-right">
@@ -56,7 +56,7 @@
                             </div>
                             <button type="submit" class="btn btn-success" ng-click="login(email, password)">Sign-in</button>
                         </form>
-                    </li>                    
+                    </li>
                     <li ng-show="isLogin()">
                         <form class="navbar-form">
                             <div class="form-group">
@@ -64,10 +64,10 @@
                             </div>
                         </form>
                     </li>
-                
+
                 </ul>
             </div><!--/.nav-collapse -->
-            
+
         </div>
     </nav>
 
@@ -83,9 +83,9 @@
     <div class="container main-content">
         <div ui-view></div>
     </div>
-    
+
     {{message}}
-    
+
     <footer>
         <div align="center">
             <p align="center" class="partners"><br>
@@ -98,20 +98,20 @@
                         <area shape="rect" coords="654,5,776,81" href="http://www.track3.org/" target="_blank">
                         <area shape="rect" coords="530,4,628,85" href="http://www.alpinecanada.org/" target="_blank">
                     </map>
-                </div>                
+                </div>
             </p>
             <p align="center">Canadian Association for Disabled Skiing</p>
         </div>
     </footer>
-        
-    <!-- build:js /assets/dist/js/vendor.min.js -->
+
+    <!-- build:js /assets/js/vendor.min.js -->
     <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>    
+    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/assets/bower_components/angular/angular.min.js"></script>
     <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <!-- endbuild -->
-    
-    <!-- build:js /assets/dist/js/build.min.js -->
+
+    <!-- build:js /assets/js/build.min.js -->
     <script src="/assets/app/module.js"></script>
     <script src="/assets/app/route.js"></script>
     <script src="/assets/app/user/loginController.js"></script>
