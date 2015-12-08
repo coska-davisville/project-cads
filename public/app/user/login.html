@@ -1,2 +1,37 @@
-<h1>login.html</h1>
-<h2>{{title}}</h2>
+<div id="login" class="col-md-12">
+    <div class="col-md-5">
+        <h3>Member Login</h3>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                <input class="form-control" ng-model="user.email" placeholder="Enter email" type="email" required>
+            </div>
+            <div class="form-group">
+                <label for="psw"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                <input class="form-control" ng-model="user.password" placeholder="Enter password" type="password" required>
+            </div>
+            <a>Forgot Password?</a>
+            <button type="submit" ng-click="login(user)" class="btn btn-primary" style="float:right;">Login</button>
+        </form>
+    </div>
+    <div class="col-md-7">
+        <h3>Sign Up!</h3>
+        <form id="signUpForm">
+            <div class="form-group">
+                <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> Email</label>
+                <input class="form-control" id="username" placeholder="Enter email" type="text">
+            </div>
+            <div class="form-group">
+                <label for="psw"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                <input class="form-control" id="psw" placeholder="Enter password" type="password">
+            </div>
+            <div class="form-group">
+                <label for="psw"><span class="glyphicon glyphicon-lock"></span> Confirm Password</label>
+                <input class="form-control" id="psw" placeholder="Confirm password" type="password">
+            </div>
+            <button type="submit" class="btn btn-primary" style="float:right;">Register
+            </button>
+        </form>
+    </div>
+</div>
+<div class="clearfix"></div>

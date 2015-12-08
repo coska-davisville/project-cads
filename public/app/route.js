@@ -1,7 +1,7 @@
 cadsApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/home");
+    $urlRouterProvider.otherwise("/login");
 
     $stateProvider
         .state('home', {
@@ -16,21 +16,33 @@ cadsApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         .state('registration', {
             url: "/registration",
             templateUrl: "/assets/app/user/registration.html",
-            controller: 'RegistrationController'
+            controller: 'RegistrationController',
+            data: {
+                requireLogin: true
+            }
         })
         .state('memberDetail', {
             url: "/memberDetail",
             templateUrl: "/assets/app/user/memberDetail.html",
-            controller: 'MemberDetailController'
+            controller: 'MemberDetailController',
+            data: {
+                requireLogin: true
+            }
         })
         .state('memberList', {
             url: "/memberList",
             templateUrl: "/assets/app/user/memberList.html",
-            controller: 'MemberListController'
+            controller: 'MemberListController',
+            data: {
+                requireLogin: true
+            }
         })
         .state('roleManagement', {
             url: "/roleManagement",
             templateUrl: "/assets/app/admin/roleManagement.html",
-            controller: 'RoleManagementController'
+            controller: 'RoleManagementController',
+            data: {
+                requireLogin: true
+            }
         });
 }]);

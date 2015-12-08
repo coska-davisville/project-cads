@@ -4,10 +4,13 @@ describe('BackendService', function() {
 
     var BackendService, httpBackend;
 
+    beforeEach(module('cadsApp'));
+
+    beforeEach(module(function ($urlRouterProvider) {
+        $urlRouterProvider.deferIntercept();
+    }));
+
     beforeEach(function() {
-
-        module('cadsApp');
-
         inject(function($httpBackend, _BackendService_) {
             BackendService = _BackendService_;
             httpBackend = $httpBackend;
@@ -23,13 +26,13 @@ describe('BackendService', function() {
         expect(BackendService.getUserCredential().email).toEqual("");
         expect(BackendService.getUserCredential().token).toEqual("");
     });
-    
+
     it('isUserLoggedIn should be false before login', function() {
         expect(BackendService.isUserLoggedIn()).toEqual(false);
     });
 
     it('callApi should return 401 unauthorized before login', function() {
-        
+
         var response;
 
         BackendService.callApi(
@@ -43,7 +46,7 @@ describe('BackendService', function() {
     });
 
     it('login should set user credential', function() {
-        
+
         var response;
 
         httpBackend.whenPOST('/users/login').respond({email: 'abc@abc.com', token: 'xxx'});
@@ -53,7 +56,7 @@ describe('BackendService', function() {
             function (r) { response = r; }, // successCallback
             function (r) { response = r; }  // errorCallback
         );
-        
+
         httpBackend.flush();
 
         expect(response.status).toEqual(200);
@@ -62,7 +65,7 @@ describe('BackendService', function() {
     });
 
     it('callApi should succeed after login', function() {
-        
+
         var response;
 
         httpBackend.whenPOST('/users/login')
@@ -89,7 +92,7 @@ describe('BackendService', function() {
             function (r) { response = r; },
             function (r) { response = r; }
         );
-        
+
         httpBackend.flush();
 
         expect(response.data);
