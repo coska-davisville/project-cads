@@ -53,7 +53,7 @@ gulp.task('useref', function() {
     return gulp.src('public/*.html')
         .pipe(userefAssets)
         .pipe($.if('*.js', $.uglify()))
-        .pipe($.if('*.css', $.minifyCss()))
+        .pipe($.if('*.css', $.minifyCss({processImport: false})))
         .pipe($.rev())
         .pipe(userefAssets.restore())
         .pipe($.useref())
@@ -62,11 +62,16 @@ gulp.task('useref', function() {
 });
 
 gulp.task('html', ['useref'], function(cb) {
-    return gulp.src([config.tmpDir + '/*.html', config.tmpDir + '/assets/dist/**/*.*'])
+    return gulp.src([config.tmpDir + '/*.html', config.tmpDir + '/assets/**/*.*'])
         .pipe(gulp.dest(config.distDir))
         .on('end', function() {
             del(config.tmpDir);
         });
+});
+
+gulp.task('templates', function() {
+    return gulp.src('public/app/**/*.html')
+        .pipe(gulp.dest(config.distDir + '/app'));
 });
 
 gulp.task('images', function() {
@@ -102,7 +107,7 @@ gulp.task('build', ['clean'], function() {
     gulp.start('build:static');
 });
 
-gulp.task('build:static', ['html', 'images', 'fonts', 'extra'], function() {
+gulp.task('build:static', ['html', 'templates', 'images', 'fonts', 'extra'], function() {
     return gulp.src([config.distDir + '/*.html', config.distDir + '/**/*.js', config.distDir + '/**/*.css'])
         .pipe($.size({title: config.distDir, showFiles: true}));
 });
