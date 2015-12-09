@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     Server = require('karma').Server,
     gulpLoadPlugins = require('gulp-load-plugins'),
     mainBowerFiles = require('main-bower-files'),
+    ngAnnotate = require('gulp-ng-annotate'),
     del = require('del');
 
 var $ = gulpLoadPlugins();
@@ -52,13 +53,8 @@ gulp.task('useref', function() {
 
     return gulp.src('public/*.html')
         .pipe(userefAssets)
-        /*
-        .pipe($.if('*.js', $.uglify({
-            mangle: {
-                except: ['angular']
-            }
-        })))
-        */
+        .pipe($.if('*.js', ngAnnotate()))
+        .pipe($.if('*.js', $.uglify()))
         .pipe($.if('*.css', $.minifyCss({processImport: false})))
         .pipe($.rev())
         .pipe(userefAssets.restore())
