@@ -12,6 +12,11 @@ GET     /users/:id                                           controllers.Users.g
 GET     /users/province/:provinceId                          controllers.Users.getUsersByProvince(provinceId: String)
 GET     /users/province/:provinceId/program/:programId       controllers.Users.getUsersByProgram(provinceId: String, programId: String)
 GET     /users/pages/:pageSize/:pageNum                      controllers.Users.getUsersByPage(pageSize: Int, pageNum: Int)
+GET     /examples                                            controllers.Examples.index
+GET     /examples/:id                                        controllers.Examples.getUser(id: Int)
+POST    /examples                                            controllers.Examples.create
+POST    /examples/update/:id                                 controllers.Examples.update(id: Int)
+GET     /examples/delete/:id                                 controllers.Examples.delete(id: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                                        controllers.Assets.versioned(path="/public", file: Asset)

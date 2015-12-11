@@ -1,0 +1,10 @@
+@(users: Seq[models.User])
+
+@main("Slick Examples") {
+<h1>Users</h1>
+<ul>
+    @for(u <- users) {
+        <li>@u.name - @u.address</li>
+    }
+</ul>
+}
