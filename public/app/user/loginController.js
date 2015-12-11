@@ -1,4 +1,10 @@
+'use strict';
 
-cadsApp.controller('LoginController', ['$scope', 'BackendService', function ($scope, bs) {
-	$scope.title = "Login Controller";
+angular.module('cadsApp')
+.controller('LoginController', ['$scope', '$state', 'BackendService', function ($scope, $state, bs) {
+	$scope.login = function(user) {
+		bs.login(user.email, user.password, function(response) {
+			$state.go('memberList');
+		});
+	};
 }]);

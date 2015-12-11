@@ -11,66 +11,19 @@
     <!-- build:css /assets/css/styles.min.css -->
     <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/stylesheets/main.css">
+    <link rel="stylesheet" href="/assets/stylesheets/style.css">
     <!-- endbuild -->
 
 </head>
-<body ng-controller="MainController">
+<body>
 
-<!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">
-                    <img id="logo" src="./images/logo.jpg" alt="CADS LOGO" style="width:100%"/>
-                </a>
-            </div>
-
-            <div id="navbar" class="navbar-collapse collapse">
-
-                <ul class="nav navbar-nav menu">
-                    <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
-                    <li ui-sref-active="active"><a ui-sref="memberList">Member List</a></li>
-                    <li ui-sref-active="active"><a ui-sref="memberDetail">Member Detail</a></li>
-                    <li ui-sref-active="active"><a ui-sref="roleManagement">Admin - Role Management</a></li>
-
-                    <li ui-sref-active="active" ng-hide="isLogin()">
-                        <a ui-sref="registration">Sign-up</a>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li ng-hide="isLogin()">
-                        <form class="navbar-form navbar-right">
-                            <div class="form-group">
-                                <input type="text" ng-model="email" placeholder="Email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" ng-model="password" placeholder="Password" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-success" ng-click="login(email, password)">Sign-in</button>
-                        </form>
-                    </li>
-                    <li ng-show="isLogin()">
-                        <form class="navbar-form">
-                            <div class="form-group">
-                                <button type="button" class="btn btn-warning" ng-click="logout()">Sign-out</button>
-                            </div>
-                        </form>
-                    </li>
-
-                </ul>
-            </div><!--/.nav-collapse -->
-
+    <header class="container-fluid" ng-controller="HeaderController">
+        <div class="col-md-3"><img id="logo" src="/assets/images/logo.jpg" alt="CADS LOGO" style="width:100%"/></div>
+        <div class="userInfo" ng-show="isLoggedIn">
+            Hi, <span>{{user.email}}</span> <span>[Participant skier]</span>
+            <button type="button" ng-click="logout()" class="btn btn-danger"><i class="fa fa-unlock-alt"></i> Logout</button>
         </div>
-    </nav>
-
+    </header>
 <!--
     <ul class="menu">
         <li><a ui-sref="login">Login</a></li>
@@ -80,11 +33,9 @@
         <li><a ui-sref="roleManagement">Admin - Role Management</a></li>
     </ul>
 -->
-    <div class="container main-content">
+    <div class="wrap">
         <div ui-view></div>
     </div>
-
-    {{message}}
 
     <footer>
         <div align="center">
@@ -114,6 +65,7 @@
     <!-- build:js /assets/js/build.min.js -->
     <script src="/assets/app/module.js"></script>
     <script src="/assets/app/route.js"></script>
+    <script src="/assets/app/user/headerController.js"></script>
     <script src="/assets/app/user/loginController.js"></script>
     <script src="/assets/app/user/memberDetailController.js"></script>
     <script src="/assets/app/user/memberListController.js"></script>
