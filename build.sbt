@@ -12,7 +12,11 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
-  jdbc,
+  "org.postgresql" % "postgresql" % "9.4-1206-jdbc42",
+  //"mysql" % "mysql-connector-java" % "5.1.37",
+  "com.typesafe.play" %% "play-slick" % "1.1.1",
+  "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1",
+  //jdbc,
   cache,
   ws,
   specs2 % Test
@@ -27,3 +31,5 @@ routesGenerator := InjectedRoutesGenerator
 // playRunHooks <+= baseDirectory.map(base => Gulp(base))
 
 PlayKeys.devSettings += ("play.http.router", "dev.Routes")
+
+//fork in run := true

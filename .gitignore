@@ -2,6 +2,8 @@ logs
 target
 bower_components
 node_modules
+.sbtserver*
+project/
 /.vagrant
 /.idea
 /.idea_modules
