@@ -1,7 +1,9 @@
 package models.tables
 
 import models.City
+import play.api.db.slick.{HasDatabaseConfigProvider, DatabaseConfigProvider}
 import slick.driver.JdbcProfile
+import javax.inject.{Singleton, Inject}
 
 trait CityTable { self: ProvinceTable =>
   val Cities: Cities
@@ -17,4 +19,12 @@ trait CityTable { self: ProvinceTable =>
 
     def * = (id.?, provinceId, name) <> (City.tupled, City.unapply _)
   }
+}
+
+@Singleton()
+class CityDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) extends CityTable
+  with HasDatabaseConfigProvider[JdbcProfile] {
+    import driver.api._
+
+    val Cities = TableQuery[Cities]
 }
