@@ -8,8 +8,11 @@ NODE_MODULE=$PROJECT_HOME/node_modules
 BOWER_EXE=$NODE_MODULE/bower/bin
 SCALA_HOME=$OPT/activator
 
-echo "Upgrading system"
-sudo apt-get update && sudo apt-get dist-upgrade -y
+echo "Creating Dirs"
+mkdir -p ${PROJECT_HOME}
+sudo apt-get update
+#echo "Upgrading system"
+#sudo apt-get update && sudo apt-get dist-upgrade -y
 
 echo "Installing programs"
 sudo apt-get install vim git git-core g++ wget unzip -y
@@ -42,4 +45,11 @@ sudo echo "PATH=\$PATH:\$HOME/opt/activator/:\$HOME/opt/nodejs/bin/" | tee -a /e
 export PATH=$PATH:${NODE_HOME}:${SCALA_HOME}
 sudo chown -R vagrant:vagrant ${OPT}
 
-cd ${PROJECT_HOME} && ${NODE_HOME}/npm install -g bower gulp && bower install
+sudo apt-get install postgresql -y
+
+sudo su -c "psql -c \"CREATE USER cads WITH PASSWORD 'cads';\"" postgres
+sudo su -c "psql -c \"CREATE DATABASE cads;\"" postgres
+sudo su -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE cads to cads;\"" postgres
+
+sudo ${NODE_HOME}/npm install -g bower gulp
+cd ${PROJECT_HOME} && npm install && bower install

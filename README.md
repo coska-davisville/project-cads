@@ -17,6 +17,7 @@
 ```bash
 git clone https://github.com/coska-davisville/project-cads.git
 cd project-cads
+vagrant plugin install vagrant-vbguest
 vagrant up // this could take a while at first time running
 vagrant ssh
 cd $HOME/sites/cads/

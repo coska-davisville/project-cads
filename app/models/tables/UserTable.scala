@@ -1,15 +1,13 @@
 package models.tables
 
 import models.User
-import play.api.db.slick.{HasDatabaseConfig, DatabaseConfigProvider}
 import slick.driver.JdbcProfile
 import slick.profile.SqlProfile.ColumnOption.{NotNull, Nullable}
-import javax.inject.{Singleton, Inject}
 
-trait UserTable { self: CityTable =>
-  val Users: Users
+trait UserTable { self:CityTable =>
+  val Cities: Cities
+
   protected val driver: JdbcProfile
-
   import driver.api._
 
   class Users(tag: Tag) extends Table[User](tag, "User") {
