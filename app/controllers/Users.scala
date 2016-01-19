@@ -1,16 +1,18 @@
 package controllers
 
 import play.api._
+import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfig}
 import play.api.http._
 import play.api.mvc._
 import play.api.libs.json._
-import play.api.data._
-import play.api.data.Forms._
+import models.tables.UserTable
 
 import play.api.Logger
+import slick.driver.JdbcProfile
 
 case class User(program: String, province: String, membership: String, email: String, firstName: String, lastName: String)
 
+/*
 object Users extends Controller {
 
 	case class UserForm(email: String, password: String)
@@ -58,22 +60,14 @@ object Users extends Controller {
 		User("Mansfield", "BC", "participant skier", "f@f.com", "Carrie", "Underwood")
 	)
 }
+*/
 
-class Users extends Controller {
+class Users extends Controller with UserTable with HasDatabaseConfig[JdbcProfile] {
+  val dbConfig = DatabaseConfigProvider.get[JdbcProfile]("cads")(Play.current)
 
-	import Users._
-	
+  import dbConfig.driver.api._
+
 	def login = Action { implicit request =>
-
-		userForm.bindFromRequest.value match {
-			case Some(data)	=> {
-				Ok(Json.toJson(UserCredential(data.email, data.password)))
-			}
-			case None 		=> {
-				userForm.bindFromRequest.errors.foreach(x => Logger.error(x.message))
-				wrongEmailOrPassword
-			}
-		}
 	}
 
 	def create = Action {
