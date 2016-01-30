@@ -1,14 +1,18 @@
 package controllers
 
 import play.api._
+import javax.inject.Inject
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfig}
 import play.api.http._
 import play.api.mvc._
 import play.api.libs.json._
-import models.tables.UserTable
+import models.tables.{CityTable, UserTable}
+import models.tables.ProvinceDAO
+import scala.concurrent.ExecutionContext.Implicits.global
 
 import play.api.Logger
 import slick.driver.JdbcProfile
+import views.html
 
 case class User(program: String, province: String, membership: String, email: String, firstName: String, lastName: String)
 
@@ -62,11 +66,19 @@ object Users extends Controller {
 }
 */
 
-class Users extends Controller with UserTable with HasDatabaseConfig[JdbcProfile] {
+class Provinces @Inject() (provinceDAO: ProvinceDAO) extends Controller {
+  def index = Action.async { implicit request =>
+    val provinces = provinceDAO.getAll()
+    provinces.map(cs => Ok(html.list(cs)))
+  }
+}
+
+class Users extends Controller with HasDatabaseConfig[JdbcProfile] {
   val dbConfig = DatabaseConfigProvider.get[JdbcProfile]("cads")(Play.current)
 
   import dbConfig.driver.api._
 
+	/*
 	def login = Action { implicit request =>
 	}
 
@@ -105,4 +117,5 @@ class Users extends Controller with UserTable with HasDatabaseConfig[JdbcProfile
 		val pn = pageSize * (pageNum - 1)
 		Ok(Json.toJson(users.drop(pn).take(pageSize)))
 	}
+	*/
 }

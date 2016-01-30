@@ -1,13 +1,15 @@
 package models.tables
 
 import models.User
+import play.api.db.slick.{HasDatabaseConfigProvider, DatabaseConfigProvider}
 import slick.driver.JdbcProfile
 import slick.profile.SqlProfile.ColumnOption.{NotNull, Nullable}
+import javax.inject.{Singleton, Inject}
 
-trait UserTable { self:CityTable =>
-  val Cities: Cities
+@Singleton()
+class UserTable @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
+  extends HasDatabaseConfigProvider[JdbcProfile]{
 
-  protected val driver: JdbcProfile
   import driver.api._
 
   class Users(tag: Tag) extends Table[User](tag, "User") {
@@ -33,7 +35,7 @@ trait UserTable { self:CityTable =>
 
     def cityId = column[Int]("cityId", Nullable)
 
-    def city = foreignKey("City_FK", cityId, TableQuery[Cities])(_.id, onUpdate=ForeignKeyAction.Cascade, onDelete=ForeignKeyAction.Restrict)
+    //def city = foreignKey("City_FK", cityId, TableQuery[Cities])(_.id, onUpdate=ForeignKeyAction.Cascade, onDelete=ForeignKeyAction.Restrict)
 
     def * = (id.?, password, memberType.?, firstName.?, lastName.?, primaryContactNo.?, secondaryContactNo.?, email, streetAddress.?, extraAddress.?, cityId.?) <> (User.tupled, User.unapply _)
   }

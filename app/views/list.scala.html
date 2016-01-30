@@ -1,0 +1,10 @@
+@(provinces: Seq[models.Province])
+
+@main("Slick Examples") {
+<h1>Provinces</h1>
+<ul>
+    @for(p <- provinces) {
+        <li>@p.name - @p.abbr</li>
+    }
+</ul>
+}

@@ -50,6 +50,13 @@ sudo apt-get install postgresql -y
 sudo su -c "psql -c \"CREATE USER cads WITH PASSWORD 'cads';\"" postgres
 sudo su -c "psql -c \"CREATE DATABASE cads;\"" postgres
 sudo su -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE cads to cads;\"" postgres
+sudo cp -b ${PROJECT_HOME}/postgresql.conf /etc/postgresql/9.4/main/
+sudo cp -b ${PROJECT_HOME}/pg_hba.conf /etc/postgresql/9.4/main/
+sudo service postgresql restart
+
+sudo echo "export DATABASE_URL=jdbc:postgresql://127.0.0.1:5432/cads" >> /etc/bash.bashrc
+sudo echo "export DATABASE_USER=cads" >> /etc/bash.bashrc
+sudo echo "export DATABASE_PASSWORD=cads" >> /etc/bash.bashrc
 
 sudo ${NODE_HOME}/npm install -g bower gulp
 cd ${PROJECT_HOME} && npm install && bower install
